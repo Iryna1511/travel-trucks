@@ -39,6 +39,7 @@ ul {
 a {
   color: currentColor;
   text-decoration: none;
+  font-family: inherit;
 }
 
 button {
