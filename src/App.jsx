@@ -4,11 +4,15 @@ import Header from "./components/Header/Header";
 import Loader from "./components/Loader/Loader";
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-import CatalogPage from "path/to/pages/About"; // todo
-import CamperPage from "path/to/pages/Products"; //todo
+const CatalogPage = lazy(() => import("./pages/CatalogPage/CatalogPage"));
+const CamperPage = lazy(() => import("./pages/CamperPage/CamperPage"));
+const CamperFeatures = lazy(() =>
+  import("./components/CamperFeatures/CamperFeatures")
+);
+const CamperReviews = lazy(() =>
+  import("./components/CamperReviews/CamperReviews")
+);
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
-import CamperFeatures from "./components"; // todo
-import CamperReviews from "./components"; //todo
 
 export default function App() {
   return (

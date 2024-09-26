@@ -1,6 +1,6 @@
 .button {
   padding: 16px 60px;
-  width: 173px;
+  width: fit-content;
   height: 56px;
   border-radius: 200px;
 

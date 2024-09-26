@@ -37,12 +37,16 @@ ul {
 }
 
 a {
+  display: inline-block;
   color: currentColor;
   text-decoration: none;
   font-family: inherit;
 }
 
 button {
+  display: inline-block;
+  border: none;
+  outline: none;
   cursor: pointer;
   font-family: inherit;
 }

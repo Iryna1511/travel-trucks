@@ -4,7 +4,7 @@ export default function Loader() {
   return (
     <div className={css.loader}>
       <FallingLines
-        color="#407bff"
+        color="#6c717b"
         width="100"
         visible={true}
         ariaLabel="falling-circles-loading"
