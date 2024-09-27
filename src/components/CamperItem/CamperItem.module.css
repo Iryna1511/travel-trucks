@@ -1,0 +1,30 @@
+.box {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
+.img {
+  border-radius: 10px;
+  width: 292px;
+  height: 320px;
+}
+.textWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.titleWrap {
+  display: flex;
+  justify-content: space-between;
+}
+.title,
+.price {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.33333;
+  color: var(--main);
+}
+.ratingWrap {
+  display: flex;
+  gap: 16px;
+}

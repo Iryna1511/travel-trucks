@@ -1,8 +1,4 @@
-export default function CamperInfo() {
-  return (
-    <div>
-      <h1>Van</h1>
-      <p>price</p>
-    </div>
-  );
+export default function CamperInfo({ camper }) {
+  const { name } = camper;
+  return <div>{camper && <h1>{name}</h1>}</div>;
 }
