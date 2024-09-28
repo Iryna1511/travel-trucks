@@ -1,27 +1,30 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { NavLink, Outlet, useParams } from "react-router-dom";
 import clsx from "clsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Layout from "../../components/Layout/Layout";
 import Loader from "../../components/Loader/Loader";
 import css from "./CamperPage.module.css";
 import CamperInfo from "../../components/CamperInfo/CamperInfo";
 import BookForm from "../../components/BookForm/BookForm";
-import { selectCampers } from "../../redux/campers/camperSelectors";
+import { selectCamperWithId } from "../../redux/campers/camperSelectors";
+import { fetchById } from "../../redux/campers/camperOperations";
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.active);
 };
-export default function ProductPage() {
+export default function CamperPage() {
+  const camper = useSelector(selectCamperWithId);
   const { id } = useParams();
-  const campers = useSelector(selectCampers);
-  let camper = null;
-  if (campers.length > 0) camper = campers.find((elem) => elem.id === id);
+  const dispatch = useDispatch();
   console.log(camper);
+  useEffect(() => {
+    dispatch(fetchById(id));
+  }, [dispatch, id]);
   return (
     <Layout>
-      <CamperInfo camper={camper} />
+      {(camper !== null) & <CamperInfo />}
       <ul className={css.list}>
         <li>
           <NavLink className={buildLinkClass} to="features">

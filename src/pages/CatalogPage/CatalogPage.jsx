@@ -27,6 +27,8 @@ export default function CatalogPage() {
     };
     dispatch(fetchCampers(params));
   }, [dispatch]);
+  const handleLoadMore = () => {};
+
   return (
     <Layout>
       <div className={css.wrap}>
@@ -36,7 +38,7 @@ export default function CatalogPage() {
           {isError && <ErrorMsg />}
 
           {campers && campers.length > 0 && <CampersList />}
-          <button onClick={() => {}} className={css.btn} type="button">
+          <button onClick={handleLoadMore} className={css.btn} type="button">
             Load more
           </button>
         </div>

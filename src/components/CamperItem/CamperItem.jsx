@@ -1,8 +1,25 @@
+import { Link } from "react-router-dom";
 import LinkBtn from "../Buttons/LinkBtn";
 import css from "./CamperItem.module.css";
 
 export default function CamperItem({ camper }) {
-  const { id, name, price, rating, location, description, gallery } = camper;
+  const {
+    id,
+    name,
+    price,
+    rating,
+    location,
+    description,
+    gallery,
+    transmission,
+    engine,
+    kitchen,
+    AC,
+    radio,
+    TV,
+    bathroom,
+  } = camper;
+  const countReviews = camper.reviews.length;
   const img = gallery[0].thumb;
   const formattedPrice = `${price},00`;
   const formattedDescr = description.slice(0, 60);
@@ -11,20 +28,93 @@ export default function CamperItem({ camper }) {
       <img className={css.img} src={img} alt={name} />
 
       <div className={css.textWrap}>
-        <div className={css.titleWrap}>
-          <h3 className={css.title}>{name}</h3>
-          <p className={css.price}>
-            <span>&#8364;</span>
-            {formattedPrice}
-          </p>
-        </div>
+        <div className={css.head}>
+          <div className={css.titleWrap}>
+            <h3 className={css.title}>{name}</h3>
+            <p className={css.price}>
+              <span>&#8364;</span>
+              {formattedPrice}
+            </p>
+            <button className={css.heartBtn} type="button">
+              <svg width={26} height={24}>
+                <use href="/sprite.svg#icon-heart"></use>
+              </svg>
+            </button>
+          </div>
 
-        <div className={css.ratingWrap}>
-          <p>{rating}</p>
-          <p>{location}</p>
+          <div className={css.ratingWrap}>
+            <Link to="/catalog/:id/reviews" className={css.rating}>
+              <svg className={css.icon} width={16} height={16}>
+                <use href="/sprite.svg#icon-star-yellow"></use>
+              </svg>
+              {rating}
+              <span>({countReviews} reviews)</span>
+            </Link>
+            <p>
+              <svg className={css.icon} width={16} height={16}>
+                <use href="/sprite.svg#icon-map"></use>
+              </svg>
+              {location}
+            </p>
+          </div>
         </div>
 
         <p>{formattedDescr}...</p>
+
+        <ul className={css.categories}>
+          <li>
+            <svg className={css.icon} width={20} height={20}>
+              <use href="/sprite.svg#icon-diagram"></use>
+            </svg>
+            {transmission}
+          </li>
+          <li>
+            <svg className={css.icon} width={20} height={20}>
+              <use href="/sprite.svg#icon-fuel-pump"></use>
+            </svg>
+            {engine}
+          </li>
+          {kitchen && (
+            <li>
+              <svg className={css.icon} width={20} height={20}>
+                <use href="/sprite.svg#icon-cup"></use>
+              </svg>
+              kitchen
+            </li>
+          )}
+          {AC && (
+            <li>
+              <svg className={css.icon} width={20} height={20}>
+                <use href="/sprite.svg#icon-wind"></use>
+              </svg>
+              AC
+            </li>
+          )}
+          {radio && (
+            <li>
+              <svg className={css.icon} width={20} height={20}>
+                <use href="/sprite.svg#icon-radios"></use>
+              </svg>
+              radio
+            </li>
+          )}
+          {TV && (
+            <li>
+              <svg className={css.icon} width={20} height={20}>
+                <use href="/sprite.svg#icon-tv"></use>
+              </svg>
+              TV
+            </li>
+          )}
+          {bathroom && (
+            <li>
+              <svg className={css.icon} width={20} height={20}>
+                <use href="/sprite.svg#icon-drop"></use>
+              </svg>
+              bathroom
+            </li>
+          )}
+        </ul>
 
         <LinkBtn link={`/catalog/${id}`}>Show more</LinkBtn>
       </div>
@@ -44,8 +134,10 @@ export default function CamperItem({ camper }) {
 //   "height": "3.65m",
 //   "tank": "208l",
 //   "consumption": "30l/100km",
+
 //   "transmission": "automatic",
 //   "engine": "diesel",
+
 //   "AC": true,
 //   "bathroom": true,
 //   "kitchen": false,
@@ -55,6 +147,7 @@ export default function CamperItem({ camper }) {
 //   "microwave": true,
 //   "gas": false,
 //   "water": true,
+
 //   "gallery": [
 //     {
 //       "thumb": "https://ftp.goit.study/img/campers-test-task/1-1.webp",
