@@ -28,7 +28,7 @@ export default function CamperPage() {
       <ul className={css.list}>
         <li>
           <NavLink className={buildLinkClass} to="features">
-            Cast
+            Features
           </NavLink>
         </li>
         <li>
@@ -38,10 +38,12 @@ export default function CamperPage() {
         </li>
       </ul>
 
-      <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense>
-      <BookForm />
+      <div className={css.wrap}>
+        <Suspense fallback={<Loader />}>
+          <Outlet />
+        </Suspense>
+        <BookForm />
+      </div>
     </Layout>
   );
 }

@@ -43,7 +43,7 @@ export default function CamperItem({ camper }) {
           </div>
 
           <div className={css.ratingWrap}>
-            <Link to="/catalog/:id/reviews" className={css.rating}>
+            <Link to={`/catalog/${id}/reviews`} className={css.rating}>
               <svg className={css.icon} width={16} height={16}>
                 <use href="/sprite.svg#icon-star-yellow"></use>
               </svg>
