@@ -24,7 +24,7 @@ export default function CamperPage() {
   }, [dispatch, id]);
   return (
     <Layout>
-      {(camper !== null) & <CamperInfo />}
+      {camper !== null && <CamperInfo />}
       <ul className={css.list}>
         <li>
           <NavLink className={buildLinkClass} to="features">
