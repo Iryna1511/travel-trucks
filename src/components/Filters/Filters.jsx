@@ -4,14 +4,37 @@ import LocationFilter from "../LocationFilter/LocationFilter";
 import FilterType from "../FiltersBtns/FilterType";
 import FilterEquipment from "../FiltersBtns/FilterEquipment";
 
+import {
+  selectLocation,
+  selectVehicleType,
+} from "../../redux/filters/filterSelectors";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCampers } from "../../redux/campers/camperOperations";
+import { selectPage } from "../../redux/campers/camperSelectors";
+import { setPage } from "../../redux/campers/camperSlice";
+
 export default function Filters() {
+  const dispatch = useDispatch();
+  const location = useSelector(selectLocation);
+  const type = useSelector(selectVehicleType);
+  const currentPage = useSelector(selectPage);
+  const searchParams = {
+    form: type,
+    location,
+    page: currentPage,
+  };
+  const handleSearch = () => {
+    dispatch(setPage(1));
+    dispatch(fetchCampers(searchParams));
+  };
+
   return (
     <aside className={css.filters}>
       <LocationFilter />
       <p className={css.text}>Filters</p>
       <FilterEquipment />
       <FilterType />
-      <SubmitBtn>Search</SubmitBtn>
+      <SubmitBtn onSearch={handleSearch}>Search</SubmitBtn>
     </aside>
   );
 }

@@ -28,7 +28,7 @@ export default function BookForm() {
     <div className={css.container}>
       <h2 className={css.title}>Book your campervan now</h2>
       <p className={css.text}>
-        Stay connected! We are always ready to help you
+        Stay connected! We are always ready to help you.
       </p>
       <Formik
         initialValues={initialValues}

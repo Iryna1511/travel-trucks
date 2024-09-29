@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
 }
+.logicWrap {
+  width: 888px;
+}
 .listContainer {
   max-width: 888px;
 }
@@ -24,6 +27,8 @@
   letter-spacing: -0.01em;
   color: var(--main);
 }
-.btn:hover {
+.btn:hover,
+.btn:focus,
+.btn:active {
   border-color: var(--button-hover);
 }

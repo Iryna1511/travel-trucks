@@ -16,7 +16,7 @@ export default function LocationFilter() {
       </label>
       <input
         className={css.input}
-        onBlur={handleChange}
+        onChange={handleChange}
         name="Location"
         type="text"
         placeholder="City"

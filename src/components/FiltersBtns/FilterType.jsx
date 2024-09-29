@@ -4,9 +4,13 @@ import { setVehicleType } from "../../redux/filters/filterSlice";
 import { selectVehicleType } from "../../redux/filters/filterSelectors";
 
 const vehicleTypes = [
-  { name: "Van", icon: "./sprite.svg#icon-grid1x2" },
-  { name: "Fully Integrated", icon: "./sprite.svg#icon-grid" },
-  { name: "Alcove", icon: "./sprite.svg#icon-grid3x3" },
+  { searchName: "panelTruck", name: "Van", icon: "./sprite.svg#icon-grid1x2" },
+  {
+    searchName: "fullyIntegrated",
+    name: "Fully Integrated",
+    icon: "./sprite.svg#icon-grid",
+  },
+  { searchName: "alcove", name: "Alcove", icon: "./sprite.svg#icon-grid3x3" },
 ];
 
 export default function FilterType() {
@@ -27,10 +31,10 @@ export default function FilterType() {
           <button
             className={css.btn}
             key={type.name}
-            onClick={() => handleVehicleTypeClick(type.name)}
+            onClick={() => handleVehicleTypeClick(type.searchName)}
             style={{
               borderColor:
-                selectedVehicleType === type.name ? "#d84343" : "#dadde1",
+                selectedVehicleType === type.searchName ? "#d84343" : "#dadde1",
             }}
           >
             <svg className={css.icon} width={32} height={32}>

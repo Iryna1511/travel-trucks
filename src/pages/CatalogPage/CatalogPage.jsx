@@ -18,6 +18,8 @@ import css from "./CatalogPage.module.css";
 import { setPage } from "../../redux/campers/camperSlice";
 
 export default function CatalogPage() {
+  const dispatch = useDispatch();
+
   const campers = useSelector(selectCampers);
   const isLoading = useSelector(selectLoading);
   const isError = useSelector(selectError);
@@ -26,11 +28,13 @@ export default function CatalogPage() {
 
   const totalPages = Math.ceil(totalItems / LIMIT);
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(fetchCampers(currentPage));
+    const searchParams = {
+      page: currentPage,
+    };
+    dispatch(fetchCampers(searchParams));
   }, [dispatch, currentPage]);
+
   const handleLoadMore = () => {
     if (currentPage < totalPages) {
       dispatch(setPage(currentPage + 1));
@@ -42,10 +46,17 @@ export default function CatalogPage() {
       <div className={css.wrap}>
         <Filters />
         <div className={css.listContainer}>
-          {isLoading && <Loader />}
-          {isError && <ErrorMsg />}
-
-          {campers && campers.length > 0 && <CampersList />}
+          {campers && campers.length > 0 && !isError && <CampersList />}
+          {isLoading && (
+            <div className={css.logicWrap}>
+              <Loader />
+            </div>
+          )}
+          {isError && (
+            <div className={css.logicWrap}>
+              <ErrorMsg />
+            </div>
+          )}
           {currentPage < totalPages && (
             <button onClick={handleLoadMore} className={css.btn} type="button">
               Load more
