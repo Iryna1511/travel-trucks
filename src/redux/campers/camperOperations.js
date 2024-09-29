@@ -1,17 +1,18 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+export const LIMIT = 4;
+
 axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchAll",
-  async (params, thunkAPI) => {
-    const { currentPage } = params;
+  async (page, thunkAPI) => {
     try {
       const response = await axios.get("/campers", {
         params: {
-          page: currentPage,
-          limit: 4,
+          page: page,
+          limit: LIMIT,
         },
       });
       return response.data;

@@ -12,15 +12,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const filterSlice = createSlice({
   name: "filters",
   initialState: {
-    currentPage: 1,
     location: "",
     vehicleType: "",
     vehicleEquipment: [],
   },
   reducers: {
-    setPage: (state) => {
-      state.currentPage += 1;
-    },
     setLocation: (state, action) => {
       state.location = action.payload;
     },
@@ -37,11 +33,8 @@ const filterSlice = createSlice({
       }
     },
   },
-  // extraReducers: (builder) => {
-  //   builder.addCase();
-  // },
 });
 
-export const { setPage, setLocation, setVehicleType, toggleEquipment } =
+export const { setLocation, setVehicleType, toggleEquipment } =
   filterSlice.actions;
 export default filterSlice.reducer;
