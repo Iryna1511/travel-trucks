@@ -18,7 +18,6 @@ export default function CamperPage() {
   const camper = useSelector(selectCamperWithId);
   const { id } = useParams();
   const dispatch = useDispatch();
-  console.log(camper);
   useEffect(() => {
     dispatch(fetchById(id));
   }, [dispatch, id]);
@@ -40,7 +39,7 @@ export default function CamperPage() {
 
       <div className={css.wrap}>
         <Suspense fallback={<Loader />}>
-          <Outlet />
+          {camper !== null && <Outlet />}
         </Suspense>
         <BookForm />
       </div>

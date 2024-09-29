@@ -8,8 +8,6 @@ export default function CamperInfo() {
   const { name, price, rating, location, gallery, description } = camper;
   const formattedPrice = `${price},00`;
   const countReviews = camper.reviews.length;
-
-  console.log(camper);
   return (
     <div>
       <h1 className={css.title}>{name}</h1>

@@ -1,9 +1,17 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCamperWithId } from "../../redux/campers/camperSelectors";
 import css from "./CamperReviews.module.css";
 import RatingStars from "../RatingStars/RatingStars";
+import { useEffect } from "react";
+import { fetchById } from "../../redux/campers/camperOperations";
+import { useParams } from "react-router-dom";
 
 export default function CamperReviews() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(fetchById(id));
+  }, [dispatch, id]);
   const camper = useSelector(selectCamperWithId);
   const { reviews } = camper;
   return (
@@ -18,12 +26,7 @@ export default function CamperReviews() {
               <div className={css.nameWrap}>
                 <p className={css.name}>{review.reviewer_name}</p>
 
-                <p className={css.stars}>
-                  <RatingStars rating={review.reviewer_rating} />
-                </p>
-                {/* <svg className={css.icon} width={16} height={16}>
-                  <use href="/sprite.svg#icon-star"></use>
-                </svg> */}
+                <RatingStars rating={review.reviewer_rating} />
               </div>
             </div>
             <p className={css.comment}>{review.comment}</p>

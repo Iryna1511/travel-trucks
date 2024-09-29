@@ -1,24 +1,10 @@
 import { Link } from "react-router-dom";
 import LinkBtn from "../Buttons/LinkBtn";
 import css from "./CamperItem.module.css";
+import CategoriesList from "../CategoriesList/CategoriesList";
 
 export default function CamperItem({ camper }) {
-  const {
-    id,
-    name,
-    price,
-    rating,
-    location,
-    description,
-    gallery,
-    transmission,
-    engine,
-    kitchen,
-    AC,
-    radio,
-    TV,
-    bathroom,
-  } = camper;
+  const { id, name, price, rating, location, description, gallery } = camper;
   const countReviews = camper.reviews.length;
   const img = gallery[0].thumb;
   const formattedPrice = `${price},00`;
@@ -60,62 +46,7 @@ export default function CamperItem({ camper }) {
         </div>
 
         <p>{formattedDescr}...</p>
-
-        <ul className={css.categories}>
-          <li>
-            <svg className={css.icon} width={20} height={20}>
-              <use href="/sprite.svg#icon-diagram"></use>
-            </svg>
-            {transmission}
-          </li>
-          <li>
-            <svg className={css.icon} width={20} height={20}>
-              <use href="/sprite.svg#icon-fuel-pump"></use>
-            </svg>
-            {engine}
-          </li>
-          {kitchen && (
-            <li>
-              <svg className={css.icon} width={20} height={20}>
-                <use href="/sprite.svg#icon-cup"></use>
-              </svg>
-              kitchen
-            </li>
-          )}
-          {AC && (
-            <li>
-              <svg className={css.icon} width={20} height={20}>
-                <use href="/sprite.svg#icon-wind"></use>
-              </svg>
-              AC
-            </li>
-          )}
-          {radio && (
-            <li>
-              <svg className={css.icon} width={20} height={20}>
-                <use href="/sprite.svg#icon-radios"></use>
-              </svg>
-              radio
-            </li>
-          )}
-          {TV && (
-            <li>
-              <svg className={css.icon} width={20} height={20}>
-                <use href="/sprite.svg#icon-tv"></use>
-              </svg>
-              TV
-            </li>
-          )}
-          {bathroom && (
-            <li>
-              <svg className={css.icon} width={20} height={20}>
-                <use href="/sprite.svg#icon-drop"></use>
-              </svg>
-              bathroom
-            </li>
-          )}
-        </ul>
-
+        <CategoriesList camper={camper} />
         <LinkBtn link={`/catalog/${id}`}>Show more</LinkBtn>
       </div>
     </div>
