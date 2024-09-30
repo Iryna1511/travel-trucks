@@ -1,9 +1,18 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import toast from "react-hot-toast";
 import SubmitBtn from "../Buttons/SubmitBtn";
 import css from "./BookForm.module.css";
 
 export default function BookForm() {
+  const notify = () =>
+    toast.success(
+      "The form has been sent successfully! We will contact you shortly.",
+      {
+        position: "top-right",
+      }
+    );
+
   const initialValues = {
     name: "",
     email: "",
@@ -21,6 +30,7 @@ export default function BookForm() {
   });
 
   const handleSubmit = (values, actions) => {
+    notify();
     console.log(values);
     actions.resetForm();
   };

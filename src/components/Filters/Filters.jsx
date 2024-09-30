@@ -1,4 +1,5 @@
 import css from "./Filters.module.css";
+import toast from "react-hot-toast";
 import SubmitBtn from "../Buttons/SubmitBtn";
 import LocationFilter from "../LocationFilter/LocationFilter";
 import FilterType from "../FiltersBtns/FilterType";
@@ -11,7 +12,7 @@ import {
 } from "../../redux/filters/filterSelectors";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/campers/camperOperations";
-import { selectPage } from "../../redux/campers/camperSelectors";
+import { selectError, selectPage } from "../../redux/campers/camperSelectors";
 import { setPage } from "../../redux/campers/camperSlice";
 
 export default function Filters() {
@@ -20,6 +21,8 @@ export default function Filters() {
   const type = useSelector(selectVehicleType);
   const currentPage = useSelector(selectPage);
   const vehicleEquipment = useSelector(selectVehicleEquipment);
+
+  const isError = useSelector(selectError);
 
   const handleSearch = () => {
     dispatch(setPage(1));
@@ -38,6 +41,11 @@ export default function Filters() {
     };
     dispatch(fetchCampers(searchParams));
   };
+
+  if (isError)
+    toast.error("We didn`t find anything. Please try again.", {
+      position: "top-right",
+    });
 
   return (
     <aside className={css.filters}>
