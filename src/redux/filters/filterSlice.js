@@ -14,7 +14,13 @@ const filterSlice = createSlice({
   initialState: {
     location: "",
     vehicleType: "",
-    vehicleEquipment: [],
+    vehicleEquipment: {
+      AC: false,
+      TV: false,
+      Bathroom: false,
+      Kitchen: false,
+      Automatic: false,
+    },
   },
   reducers: {
     setLocation: (state, action) => {
@@ -24,13 +30,8 @@ const filterSlice = createSlice({
       state.vehicleType = action.payload;
     },
     toggleEquipment: (state, action) => {
-      if (state.vehicleEquipment.includes(action.payload)) {
-        state.vehicleEquipment = state.vehicleEquipment.filter(
-          (opt) => opt !== action.payload
-        );
-      } else {
-        state.vehicleEquipment.push(action.payload);
-      }
+      const equipment = action.payload;
+      state.vehicleEquipment[equipment] = !state.vehicleEquipment[equipment]; 
     },
   },
 });

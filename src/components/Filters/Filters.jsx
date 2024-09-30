@@ -6,6 +6,7 @@ import FilterEquipment from "../FiltersBtns/FilterEquipment";
 
 import {
   selectLocation,
+  selectVehicleEquipment,
   selectVehicleType,
 } from "../../redux/filters/filterSelectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,13 +19,23 @@ export default function Filters() {
   const location = useSelector(selectLocation);
   const type = useSelector(selectVehicleType);
   const currentPage = useSelector(selectPage);
-  const searchParams = {
-    form: type,
-    location,
-    page: currentPage,
-  };
+  const vehicleEquipment = useSelector(selectVehicleEquipment);
+
   const handleSearch = () => {
     dispatch(setPage(1));
+    const filteredEquipment = Object.fromEntries(
+      Object.entries(vehicleEquipment)
+        .filter(([key, value]) => value === true)
+        .filter(([key]) => key !== "Automatic")
+    );
+    const transmissionType = vehicleEquipment.Automatic ? "automatic" : "";
+    const searchParams = {
+      equipment: filteredEquipment,
+      transmission: transmissionType,
+      form: type,
+      location,
+      page: currentPage,
+    };
     dispatch(fetchCampers(searchParams));
   };
 

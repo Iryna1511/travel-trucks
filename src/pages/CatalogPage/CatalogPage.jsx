@@ -16,6 +16,10 @@ import CampersList from "../../components/CampersList/CampersList";
 import Filters from "../../components/Filters/Filters";
 import css from "./CatalogPage.module.css";
 import { setPage } from "../../redux/campers/camperSlice";
+import {
+  selectLocation,
+  selectVehicleType,
+} from "../../redux/filters/filterSelectors";
 
 export default function CatalogPage() {
   const dispatch = useDispatch();
@@ -25,6 +29,8 @@ export default function CatalogPage() {
   const isError = useSelector(selectError);
   const currentPage = useSelector(selectPage);
   const totalItems = useSelector(selectTotal);
+  const location = useSelector(selectLocation);
+  const type = useSelector(selectVehicleType);
 
   const totalPages = Math.ceil(totalItems / LIMIT);
 
@@ -36,9 +42,13 @@ export default function CatalogPage() {
   }, [dispatch, currentPage]);
 
   const handleLoadMore = () => {
-    if (currentPage < totalPages) {
-      dispatch(setPage(currentPage + 1));
-    }
+    dispatch(setPage(currentPage + 1));
+    const searchParams = {
+      form: type,
+      location,
+      page: currentPage,
+    };
+    dispatch(fetchCampers(searchParams));
   };
 
   return (
@@ -46,7 +56,7 @@ export default function CatalogPage() {
       <div className={css.wrap}>
         <Filters />
         <div className={css.listContainer}>
-          {campers && campers.length > 0 && !isError && <CampersList />}
+          {campers && campers.length > 0 && <CampersList />}
           {isLoading && (
             <div className={css.logicWrap}>
               <Loader />

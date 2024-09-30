@@ -8,12 +8,12 @@ const vehicleEquipments = [
   { name: "Automatic", icon: "./sprite.svg#icon-diagram" },
   { name: "Kitchen", icon: "./sprite.svg#icon-cup" },
   { name: "TV", icon: "./sprite.svg#icon-tv" },
-  { name: "Bahtroom", icon: "./sprite.svg#icon-drop" },
+  { name: "Bathroom", icon: "./sprite.svg#icon-drop" },
 ];
 
 export default function FilterEquipment() {
   const dispatch = useDispatch();
-  const selecedtVehicleEquipment = useSelector(selectVehicleEquipment);
+  const vehicleEquipment = useSelector(selectVehicleEquipment);
   return (
     <div className={css.container}>
       <h4 className={css.title}>Vehicle equipment</h4>
@@ -24,9 +24,7 @@ export default function FilterEquipment() {
             key={type.name}
             onClick={() => dispatch(toggleEquipment(type.name))}
             style={{
-              borderColor: selecedtVehicleEquipment.includes(type.name)
-                ? "#d84343"
-                : "#dadde1",
+              borderColor: vehicleEquipment[type.name] ? "#d84343" : "#dadde1",
             }}
           >
             <svg className={css.icon} width={32} height={32}>
